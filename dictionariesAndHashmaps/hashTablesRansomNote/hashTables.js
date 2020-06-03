@@ -35,16 +35,16 @@ function checkMagazine(magazine, note) {
                 map.set(magazine[i], 1)
             }
             else {
-                let wordNum = map.get(magazine[i]);
+                //let wordNum = map.get(magazine[i]);
                 //console.log('wordnum: ', wordNum);
-                map.set(magazine[i], wordNum++);
+                map.set(magazine[i], map.get(magazine[i]) + 1);
             }
         }
         //console.log(map);
         for (let i = 0; i < note.length; i++) {
             if (map.has(note[i])) {
-                let wordNum = map.get(note[i]);
-                map.set(note[i], wordNum - 1);
+                //let wordNum = map.get(note[i]);
+                map.set(note[i], map.get(note[i]) - 1);
                 if (map.get(note[i]) < 0) {
                     console.log('No');
                     return;
