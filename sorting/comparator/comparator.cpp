@@ -17,13 +17,8 @@ public:
         if (a.score > b.score) {
             return 1;
         }
-        else if (a.score == b.score) {
-            if (a.name < b.name) {
-                return 1;
-            }
-            else {
-                return -1;
-            }
+        else if (a.score == b.score && a.name < b.name) {
+            return 1;
         }
         else {
             return -1;
@@ -31,12 +26,14 @@ public:
     }
 };
 
+
+
+
 bool compare(Player a, Player b) {
     if(Checker::comparator(a,b) == -1)
         return false;
     return true;
 }
-
 int main()
 {
     int n;
