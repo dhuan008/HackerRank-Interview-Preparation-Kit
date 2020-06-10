@@ -26,33 +26,29 @@ function readLine() {
 
 // Complete the activityNotifications function below.
 function activityNotifications(expenditure, d) {
-    expenditure.sort((a, b) => {return a - b});
     let notify = 0;
-    let medianPos = 0;
+    let median = 0;
 
-    if (d % 2 === 1) { // if odd
-        medianPos = Math.ceil(d / 2);
-    }
-    else {
-        medianPos = d / 2;
-    }
-
-    for (let i = d; i < expenditure.length; i++ ) {
-        // Greater than || equal median notify++
-        let median = 0;
+    for (let i = d; i < expenditure.length; i++) {
+        // need a sorted subset here
+        let prevSpending = expenditure.slice(i - d, i).sort((a, b) => a - b);
         if (d % 2 === 1) {
-            median = expenditure[i-Math.ceil(d / 2)];
+            median = prevSpending[Math.ceil(d / 2) - 1];
         }
         else {
-            median = (expenditure(i - d / 2) + expenditure( i - (d / 2 - 1))) / 2;
+            median = (prevSpending[d / 2] + prevSpending[d / 2 - 1]) / 2;
         }
 
-        if (median >= expenditure[i]) {
+        console.log(expenditure);
+        console.log(prevSpending);
+        console.log(median);
+
+        if (expenditure[i] >= median * 2) {
             notify++;
         }
     }
 
-    console.log(notify);
+    return notify;
 
 }
 
