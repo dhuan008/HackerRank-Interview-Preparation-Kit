@@ -24,52 +24,40 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-function findMedian(arr, d) {
-    //const isOdd = d % 2 === 1;
-    const isEven = d % 2 === 0;
-    const mid = Math.ceil(d / 2);
-    console.log('mid: ', mid);
-    let sum = 0;
-    let median = null;
-
-    for (let i = 0; i < arr.length; i++) {
-        // if a value exists increase sum
-        if (arr[i] > 0) {
-            console.log('arr[i]: ', arr[i]);
-            sum += arr[i];
-            console.log('sum: ', sum);
-
-            if (isEven && sum === mid) {
-                median = i;
-            }
-            else if (sum >= mid) {
-                return median = median ? (median + i) / 2 : i;
-            }
-        }
-    }
-}
-
 // Complete the activityNotifications function below.
 function activityNotifications(expenditure, d) {
-    // initialize a frequency table to zeros
-    const frequency = new Array(200).fill(0);
 
-    // increment the first d elements
-    for (let i = 0; i < d; i++) {
-        frequency[expenditure[i]] += 1;
+    // Number of notifications
+    let notify = 0;
+
+    // Set midpoints for median calculation
+    let [i1, i2] = [Math.floor((d - 1) / 2), Math.ceil((d - 1) / 2)];
+    let m1, m2, m;
+
+    // Initialize count sorted subarray
+    let frequency = new Array(200).fill(0);
+    for (let i = d - 1; i >= 0; i--) {
+        frequency[expenditure[i]]++;
     }
 
-    let notify = 0;
-    let median = 0;
+    // Iterate through expenditures
+    for (let i = d, l = expenditure.length; i < l; i++) {
 
-    for (let i = d; i < expenditure.length; i++) {
-        median = findMedian(frequency, d);
-        console.log('median: ', median);
-        if (expenditure[i] >= median * 2) {
+        // Find median
+        for (let j = 0, k = 0; k <= i1; k += frequency[j], j++) {
+            m1 = j;
+        }
+        for (let j = 0, k = 0; k <= i2; k += frequency[j], j++) {
+            m2 = j;
+        }
+        m = (m1 + m2) / 2;
+
+        // Check if notification is given
+        if (expenditure[i] >= m * 2) {
             notify++;
         }
 
-        // remove the oldest spending and add the newest
+        // Replace subarray elements
         frequency[expenditure[i - d]]--;
         frequency[expenditure[i]]++;
     }
