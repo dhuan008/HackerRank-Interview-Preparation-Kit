@@ -28,11 +28,13 @@ function readLine() {
 function activityNotifications(expenditure, d) {
     let notify = 0;
     let median = 0;
+    let prevSpending = 0;
+    const isOdd = d % 2 === 1;
 
     for (let i = d; i < expenditure.length; i++) {
         // need a sorted subset here
-        let prevSpending = expenditure.slice(i - d, i).sort((a, b) => a - b);
-        if (d % 2 === 1) {
+        prevSpending = expenditure.slice(i - d, i).sort((a, b) => a - b);
+        if (isOdd) {
             median = prevSpending[Math.ceil(d / 2) - 1];
         }
         else {
