@@ -33,7 +33,7 @@ function isSame(map) {
         break;
     }
     for (let value of map.values()) {
-        if (value !== same) {
+        if (value !== same && value !== 0) {
             return false;
         }
     }
@@ -42,6 +42,7 @@ function isSame(map) {
 
 // Complete the isValid function below.
 function isValid(s) {
+    //console.log(s.split('').sort());
     //populate the map
     let charMap = new Map();
     for (let i = 0; i < s.length; i++) {
@@ -53,7 +54,20 @@ function isValid(s) {
         }
     }
 
-    console.log(isSame(charMap));
+    // test case all true
+    if (isSame(charMap)) {
+        return 'YES';
+    }
+    // test each one with one char removed
+    for (let [key, value] of charMap) {
+        charMap.set(key, charMap.get(key) - 1);
+        if (isSame(charMap)) {
+            return 'YES';
+        }
+        charMap.set(key, charMap.get(key) + 1);
+    }
+
+    return 'NO';
 
 }
 
