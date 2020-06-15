@@ -28,23 +28,23 @@ function readLine() {
 function substrCount(n, s) {
     let count = n;
 
-    let res1 = s.match(/([a-z])\1+/g);
+    let temp = s.match(/([a-z])\1+/g);
 
     let triangular = (x) => {
         return (x * x + x) / 2;
     };
 
-    if (res1 != null) {
-        res1.forEach((item, index) => {
+    if (temp != null) {
+        temp.forEach((item, index) => {
             count += triangular(item.length - 1);
         });
 
     }
 
-    res1 = s.match(/(([a-z])\2*)(?!\1)(?=[a-z]\1)/g);
+    temp = s.match(/(([a-z])\2*)(?!\1)(?=[a-z]\1)/g);
 
-    if (res1 != null) {
-        res1.forEach((item, index) => {
+    if (temp != null) {
+        temp.forEach((item, index) => {
             count += (item.length);
         });
 
